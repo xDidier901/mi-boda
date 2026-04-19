@@ -1,43 +1,42 @@
 // Carousel image array
 const carouselImages = [
-    'images/Didier_Valeria-0109EDIT%202.jpg',
-    'images/Didier_Valeria-0116EDIT%202.jpg',
-    'images/Didier_Valeria-0123EDIT%202.jpg',
-    'images/Didier_Valeria-0131EDIT%202.jpg',
-    'images/Didier_Valeria-0139EDIT%202.jpg',
-    'images/Didier_Valeria-0154EDIT%202.jpg',
-    'images/Didier_Valeria-0176EDIT%202.jpg',
-    'images/Didier_Valeria-0225EDIT%202.jpg',
-    'images/Didier_Valeria-0235EDIT%202.jpg',
-    'images/Didier_Valeria-0283EDIT%202.jpg',
-    'images/Didier_Valeria-0297EDIT%202.jpg',
-    'images/Didier_Valeria-0305EDIT%202.jpg',
-    'images/Didier_Valeria-0326EDIT%202.jpg',
-    'images/Didier_Valeria-0340EDIT%202.jpg',
-    'images/Didier_Valeria-0346EDIT%202.jpg',
-    'images/Didier_Valeria-0348EDIT%202.jpg',
-    'images/Didier_Valeria-0349EDIT%202.jpg',
-    'images/Didier_Valeria-0355EDIT%202.jpg',
-    'images/Didier_Valeria-0395EDIT%202.jpg',
-    'images/Didier_Valeria-0404EDIT%202.jpg',
-    'images/Didier_Valeria-0419EDIT%202.jpg',
-    'images/Didier_Valeria-0426EDIT%202.jpg',
-    'images/Didier_Valeria-0442EDIT%202.jpg'
+    'images/Didier_Valeria-0002EDIT 2.jpg',
+    'images/Didier_Valeria-0007EDIT 2.jpg',
+    'images/Didier_Valeria-0013EDIT 2.jpg',
+    'images/Didier_Valeria-0026EDIT 2.jpg',
+    'images/Didier_Valeria-0043EDIT 2.jpg',
+    'images/Didier_Valeria-0063EDIT 2.jpg',
+    'images/Didier_Valeria-0090EDIT 2.jpg',
+    'images/Didier_Valeria-0109EDIT 2.jpg',
+    'images/Didier_Valeria-0123EDIT 2.jpg',
+    'images/Didier_Valeria-0131EDIT 2.jpg',
+    'images/Didier_Valeria-0176EDIT 2.jpg',
+    'images/Didier_Valeria-0235EDIT 2.jpg',
+    'images/Didier_Valeria-0283EDIT 2.jpg',
+    'images/Didier_Valeria-0297EDIT 2.jpg',
+    'images/Didier_Valeria-0326EDIT 2.jpg',
+    'images/Didier_Valeria-0340EDIT 2.jpg',
+    'images/Didier_Valeria-0348EDIT 2.jpg',
+    'images/Didier_Valeria-0349EDIT 2.jpg',
+    'images/Didier_Valeria-0395EDIT 2.jpg',
+    'images/Didier_Valeria-0419EDIT 2.jpg',
+    'images/Didier_Valeria-0426EDIT 2.jpg',
+    'images/Didier_Valeria-0442EDIT 2.jpg'
 ];
 
 const galleryCarouselImages = [
-    'images/Didier_Valeria-0007EDIT%202.jpg',
-    'images/Didier_Valeria-0013EDIT%202.jpg',
-    'images/Didier_Valeria-0026EDIT%202.jpg',
-    'images/Didier_Valeria-0043EDIT%202.jpg',
-    'images/Didier_Valeria-0063EDIT%202.jpg',
-    'images/Didier_Valeria-0090EDIT%202.jpg',
-    'images/Didier_Valeria-0109EDIT%202.jpg',
-    'images/Didier_Valeria-0116EDIT%202.jpg',
-    'images/Didier_Valeria-0123EDIT%202.jpg',
-    'images/Didier_Valeria-0131EDIT%202.jpg',
-    'images/Didier_Valeria-0139EDIT%202.jpg',
-    'images/Didier_Valeria-0154EDIT%202.jpg'
+    'images/Didier_Valeria-0002EDIT 2.jpg',
+    'images/Didier_Valeria-0007EDIT 2.jpg',
+    'images/Didier_Valeria-0013EDIT 2.jpg',
+    'images/Didier_Valeria-0026EDIT 2.jpg',
+    'images/Didier_Valeria-0043EDIT 2.jpg',
+    'images/Didier_Valeria-0063EDIT 2.jpg',
+    'images/Didier_Valeria-0090EDIT 2.jpg',
+    'images/Didier_Valeria-0109EDIT 2.jpg',
+    'images/Didier_Valeria-0123EDIT 2.jpg',
+    'images/Didier_Valeria-0131EDIT 2.jpg',
+    'images/Didier_Valeria-0176EDIT 2.jpg',
+    'images/Didier_Valeria-0235EDIT 2.jpg'
 ];
 
 let currentImageIndex = 0;
@@ -245,6 +244,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initGalleryDots();
     updateGalleryState();
+
+    // Add loading animation to gallery images
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    galleryItems.forEach(item => {
+        item.classList.add('loading');
+        const img = item.querySelector('img');
+        if (img) {
+            img.addEventListener('load', () => {
+                item.classList.remove('loading');
+            });
+            // If already loaded
+            if (img.complete) {
+                item.classList.remove('loading');
+            }
+        }
+    });
 
     window.addEventListener('resize', () => {
         initGalleryDots();
