@@ -97,6 +97,23 @@ body {
     margin: 0 auto;
 }
 
+.header-date {
+    font-size: 1.1em;
+    opacity: 0.9;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.subtitle-secondary {
+    font-size: 1em;
+    opacity: 0.85;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 12px auto 0;
+}
+
 .whatsapp-note {
     margin-top: 12px;
     color: #7d4f65;
@@ -109,6 +126,56 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+/* Itinerary Section */
+.itinerary-section {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    margin-bottom: 60px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.itinerary-section h2 {
+    color: #d4879e;
+    margin-bottom: 40px;
+    font-size: 2em;
+    text-align: center;
+    font-weight: 600;
+}
+
+.itinerary-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.itinerary-item {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.itinerary-time {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #d4879e;
+    min-width: 100px;
+    text-align: center;
+}
+
+.itinerary-activity {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 1px;
+}
+
+.itinerary-divider {
+    height: 2px;
+    background: linear-gradient(90deg, rgba(212, 135, 158, 0.2) 0%, rgba(212, 135, 158, 0.5) 50%, rgba(212, 135, 158, 0.2) 100%);
+    margin: 15px 0;
 }
 
 /* Info Cards */
@@ -159,6 +226,28 @@ body {
     font-size: 0.9em;
     color: #666;
     line-height: 1.4;
+}
+
+.color-palette {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 15px 0;
+}
+
+.color-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.color-dot:hover {
+    transform: scale(1.15);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 }
 
 /* Map Section */
