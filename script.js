@@ -164,17 +164,17 @@ style.textContent += `
 document.head.appendChild(style);
 
 // RSVP form handling
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialize countdown timer
     function initializeCountdown() {
         // Wedding date: February 20, 2027 at 4:00 PM in Hermosillo (UTC-7)
         // Hermosillo is in the Pacific Time Zone (UTC-7)
         const weddingDate = new Date('2027-02-20T16:00:00').getTime();
-        
+
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = weddingDate - now;
-            
+
             if (distance < 0) {
                 document.getElementById('days').textContent = '000';
                 document.getElementById('hours').textContent = '00';
@@ -182,44 +182,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('seconds').textContent = '00';
                 return;
             }
-            
+
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
+
             document.getElementById('days').textContent = String(days).padStart(3, '0');
             document.getElementById('hours').textContent = String(hours).padStart(2, '0');
             document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
             document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
         }
-        
+
         updateCountdown();
         setInterval(updateCountdown, 1000);
     }
-    
+
     initializeCountdown();
-    
+
     const rsvpForm = document.querySelector('.rsvp-form');
-    
+
     if (rsvpForm) {
-        rsvpForm.addEventListener('submit', function(e) {
+        rsvpForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Retrieve form values
             const name = document.getElementById('name').value;
             const guests = document.getElementById('guests').value;
-            
+
             // Validate required fields
             if (!name || !guests) {
                 alert('Por favor, completa todos los campos requeridos.');
                 return;
             }
-            
+
             const message = `Boda Valeria y Didier - Hola! Soy ${name} y confirmo la asistencia de ${guests} personas. Gracias!`;
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
-            
+
             // Save to localStorage (for demo)
             const formData = {
                 name: name,
@@ -230,21 +230,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const confirmaciones = JSON.parse(localStorage.getItem('confirmaciones') || '[]');
             confirmaciones.push(formData);
             localStorage.setItem('confirmaciones', JSON.stringify(confirmaciones));
-            
+
             // Show success message
             const btn = rsvpForm.querySelector('.submit-btn');
             const originalText = btn.textContent;
             btn.textContent = 'Abriendo WhatsApp...';
             btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-            
+
             // Navigate to WhatsApp in the same tab if a new window/tab is blocked
             window.location.href = whatsappUrl;
-            
+
             setTimeout(() => {
                 btn.textContent = originalText;
                 btn.style.background = '';
             }, 3000);
-            
+
             rsvpForm.reset();
             console.log('Datos del formulario:', formData);
         });
@@ -264,13 +264,85 @@ document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
     });
 });
 
+// Modal functionality for Gifts
+document.addEventListener('DOMContentLoaded', function () {
+    // --- Gifts modal ---
+    const giftsModal = document.getElementById('giftsModal');
+    const giftLinkBtn = document.querySelector('.gift-link-btn');
+
+    if (giftLinkBtn) {
+        giftLinkBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            giftsModal.classList.add('active');
+        });
+    }
+
+    if (giftsModal) {
+        giftsModal.querySelector('.modal-close').addEventListener('click', function () {
+            giftsModal.classList.remove('active');
+        });
+        giftsModal.addEventListener('click', function (e) {
+            if (e.target === giftsModal) giftsModal.classList.remove('active');
+        });
+    }
+
+    // --- Venue map modal ---
+    const venueModal = document.getElementById('venueModal');
+    const openVenueMap = document.querySelector('.open-venue-map');
+
+    if (openVenueMap) {
+        openVenueMap.addEventListener('click', function (e) {
+            e.preventDefault();
+            venueModal.classList.add('active');
+        });
+    }
+
+    if (venueModal) {
+        venueModal.querySelector('.modal-close').addEventListener('click', function () {
+            venueModal.classList.remove('active');
+        });
+        venueModal.addEventListener('click', function (e) {
+            if (e.target === venueModal) venueModal.classList.remove('active');
+        });
+    }
+
+    // --- Church map modal ---
+    const churchModal = document.getElementById('churchModal');
+    const openChurchMap = document.querySelector('.open-church-map');
+
+    if (openChurchMap) {
+        openChurchMap.addEventListener('click', function (e) {
+            e.preventDefault();
+            churchModal.classList.add('active');
+        });
+    }
+
+    if (churchModal) {
+        churchModal.querySelector('.modal-close').addEventListener('click', function () {
+            churchModal.classList.remove('active');
+        });
+        churchModal.addEventListener('click', function (e) {
+            if (e.target === churchModal) churchModal.classList.remove('active');
+        });
+    }
+
+    // Close any modal with Escape key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            giftsModal && giftsModal.classList.remove('active');
+            venueModal && venueModal.classList.remove('active');
+            churchModal && churchModal.classList.remove('active');
+        }
+    });
+});
+
 // Page load effect
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     document.body.style.opacity = '1';
 });
 
 // Add entrance animation to elements
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const cards = document.querySelectorAll('.info-card');
     cards.forEach((card, index) => {
         card.style.animation = `slideIn 0.5s ease ${index * 0.1}s forwards`;
